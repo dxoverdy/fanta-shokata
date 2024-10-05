@@ -1,0 +1,620 @@
+<html>
+<head>
+  <title>Fanta Shokata</title>
+</head>
+
+<style>
+  .page {
+    background-color: #99CCFF;
+  }
+
+  .content-frame {
+    border: 0px;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 673px;
+    border-spacing: 0px;
+  }
+
+  th, td {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .header-cell {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 44px;
+    padding-bottom: 0px;
+    text-align: center;
+    vertical-align: top;
+  }
+
+  .main-cell {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+  }
+
+  .footer-cell {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    text-align: center;
+    vertical-align: top;
+  }
+
+  
+  .menu-item {
+    font-family: Verdana, Tahoma;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #3A60A5;
+    text-decoration: none;
+  }
+  .menu-item:hover {
+    font-family: Verdana, Tahoma;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #EFE1A3;
+    text-decoration: none;
+  }
+
+
+
+  .body-text {
+    font-family: Verdana, Tahoma;
+    font-size: 8pt;
+    color: #3A60A5;
+    text-decoration: none;
+  }
+
+
+
+  .footer-text {
+    font-family: Verdana, Tahoma;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #3A60A5;
+    text-decoration: none;
+  }
+  .footer-link {
+    font-family: Verdana, Tahoma;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #3A60A5;
+  }
+  .footer-link:hover {
+    font-family: Verdana, Tahoma;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #EFE1A3;
+    text-decoration: none;
+  }
+
+
+
+  .createvideo-div {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    font-family: Verdana, Tahoma;
+    font-size: 8pt;
+    color: #3A60A5;
+    text-decoration: none;
+  }
+
+  .movie-span {
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+  }
+
+
+</style>
+<body class="page">
+<script language="JavaScript">
+  /*
+  Invokes the page handler when the DOM is fully loaded.
+  */
+  document.addEventListener("DOMContentLoaded", function() {
+    startUp();
+  });
+</script>
+<table class="content-frame">
+  <tr style="background-image: url(i/header.png);">
+    <td width="160" height="158" class="header-cell"><a href="?p=Home" class="menu-item">HOME</a></td>
+    <td width="353" height="158"><img src="i/transparent.png" width="1" height="158" /></td>
+    <td width="160" height="158" class="header-cell"><a href="?p=Create" class="menu-item">MAKE MOVIES</a></td>
+  </tr>
+  <tr style="background-image: url(i/body-background.png);">
+    <td colspan="3" width="673"><div id="BodyContents" class="main-cell"></div></td>
+  </tr>
+  <tr style="background-image: url(i/footer.png);">
+    <td width="1" height="36"><img src="i/transparent.png" width="1" height="36" /></td>
+    <td width="1" height="36" class="footer-cell"><span class="footer-text">You like? Then drop me a <a href="mailto:daniel@mydan.com" class="footer-link">line</a>, boss.</span></td>
+    <td width="1" height="36"><img src="i/transparent.png" width="1" height="36" /></td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+<script language="JavaScript">
+
+// A base 64 encoded JSON containing default captions for each video, and timings
+const _captions = 'ewogICAidmlkZW9zIjpbCiAgICAgIHsKICAgICAgICAgImlkIjoiMDEiLAogICAgICAgICAiY3VlcyI6WwogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICJzdGFydCI6MiwKICAgICAgICAgICAgICAgImVuZCI6Ny41LAogICAgICAgICAgICAgICAidGV4dCI6IkFoaCEgIFRoaXMgaXMgcHJlbWl1bSEgIFdoYXQgaXMgdGhlIHNlY3JldCB0byB5b3VyIHF1YWxpdHkgbmFhbj8iCiAgICAgICAgICAgIH0sCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgInN0YXJ0Ijo4LjIsCiAgICAgICAgICAgICAgICJlbmQiOjEyLAogICAgICAgICAgICAgICAidGV4dCI6IldoeSBpdCBpcyBzdWdhciwgY29jb251dCBhbmQgcmFpc2lucyEiCiAgICAgICAgICAgIH0sCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgInN0YXJ0IjoxNCwKICAgICAgICAgICAgICAgImVuZCI6MTgsCiAgICAgICAgICAgICAgICJ0ZXh0IjoiSXQncyBhIHRhZCBzd2VldCBmb3IgY3VycnkhIgogICAgICAgICAgICB9CiAgICAgICAgIF0KICAgICAgfSwKICAgICAgewogICAgICAgICAiaWQiOiIwMiIsCiAgICAgICAgICJjdWVzIjpbCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgInN0YXJ0Ijo5LjUsCiAgICAgICAgICAgICAgICJlbmQiOjE1LAogICAgICAgICAgICAgICAidGV4dCI6IkFuZCB3aGF0IGRvIHlvdSB0aGluayB5b3UncmUgdXAgdG8_IgogICAgICAgICAgICB9LAogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICJzdGFydCI6MTUuMiwKICAgICAgICAgICAgICAgImVuZCI6MjEsCiAgICAgICAgICAgICAgICJ0ZXh0IjoiUmVzdCBhc3N1cmVkIEknbSBseWluZyBoZXJlIG5vdywgYnV0IG9uZSBkYXkgSSdtIGdvaW5nIHRvIGVhdCB0aGUgZmluZXN0IGN1cnJ5ISIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjIyLjUsCiAgICAgICAgICAgICAgICJlbmQiOjI3LAogICAgICAgICAgICAgICAidGV4dCI6IkFuZCBJIHdpbGwgZ2l2ZSB5b3UgdGhlIGZpbmVzdCBwZXNod2FyaSBuYWFuISIKICAgICAgICAgICAgfQogICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAgImlkIjoiMDMiLAogICAgICAgICAiY3VlcyI6WwogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICJzdGFydCI6MC41LAogICAgICAgICAgICAgICAiZW5kIjoxLjYsCiAgICAgICAgICAgICAgICJ0ZXh0IjoiSSB3aXNoIEkgY291bGQgc2hvdyB5b3UgdGhlIHdheSEiCiAgICAgICAgICAgIH0sCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgInN0YXJ0IjoxLjcsCiAgICAgICAgICAgICAgICJlbmQiOjQuMywKICAgICAgICAgICAgICAgInRleHQiOiJXaGF0Li4uIHdpdGggYSBwZXNod2FyaSBuYWFuPyIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjUsCiAgICAgICAgICAgICAgICJlbmQiOjkuNSwKICAgICAgICAgICAgICAgInRleHQiOiJZb3UndmUgZ29uZSBhbmQgZG9uZSBpdC4gIFlvdSd2ZSB0b29rIG15IGRpZ25pdHkgZnJvbSBtZSEiCiAgICAgICAgICAgIH0KICAgICAgICAgXQogICAgICB9LAogICAgICB7CiAgICAgICAgICJpZCI6IjA0IiwKICAgICAgICAgImN1ZXMiOlsKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjQuOCwKICAgICAgICAgICAgICAgImVuZCI6NiwKICAgICAgICAgICAgICAgInRleHQiOiJHb3QgYW55IHBlc2h3YXJpIG5hYW5zPyIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjYuMSwKICAgICAgICAgICAgICAgImVuZCI6OC4xLAogICAgICAgICAgICAgICAidGV4dCI6IkkgZG8gbm90IHNlbGwgc2hpdC4iCiAgICAgICAgICAgIH0sCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgInN0YXJ0Ijo4LjgsCiAgICAgICAgICAgICAgICJlbmQiOjExLAogICAgICAgICAgICAgICAidGV4dCI6IllvdSwgbXkgc29uLCBoYXZlIG5vdCBiZWVuIGVubGlnaHRlbmVkISIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjExLjYsCiAgICAgICAgICAgICAgICJlbmQiOjEzLAogICAgICAgICAgICAgICAidGV4dCI6IkJhaGhoaCEiCiAgICAgICAgICAgIH0KICAgICAgICAgXQogICAgICB9LAogICAgICB7CiAgICAgICAgICJpZCI6IjA1IiwKICAgICAgICAgImN1ZXMiOlsKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjAuOSwKICAgICAgICAgICAgICAgImVuZCI6NS45LAogICAgICAgICAgICAgICAidGV4dCI6IldoYXQgZG8geW91IHRoaW5rIGhlJ3MgZ290IHBsYW5uZWQ_IgogICAgICAgICAgICB9LAogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICJzdGFydCI6Ni4zLAogICAgICAgICAgICAgICAiZW5kIjo5LjQsCiAgICAgICAgICAgICAgICJ0ZXh0IjoiSSdtIG5vdCBzdXJlLCBidXQgSSBrbm93IGhlJ3MgbmVhcmJ5Li4uIgogICAgICAgICAgICB9LAogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICJzdGFydCI6OS40LAogICAgICAgICAgICAgICAiZW5kIjoxNiwKICAgICAgICAgICAgICAgInRleHQiOiJIYXZlIHlvdSBkcm9wcGVkIHlvdXIgZ3V0cz8gIEl0IHN0aW5rcyB0byBraW5nZG9tIGNvbWUuICBJIHN3ZWFyIHRvIEdvZCBpZiB5b3UgaGF2ZSBJJ2xsIGhhbmQgeW91IHlvdXIgYXNzISIKICAgICAgICAgICAgfQogICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAgImlkIjoiMDYiLAogICAgICAgICAiY3VlcyI6WwogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICJzdGFydCI6MC42LAogICAgICAgICAgICAgICAiZW5kIjoxLjksCiAgICAgICAgICAgICAgICJ0ZXh0IjoiVGVsbCBtZSB3aGF0IGhlIHdhbnRzPyIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjIsCiAgICAgICAgICAgICAgICJlbmQiOjYuOCwKICAgICAgICAgICAgICAgInRleHQiOiJQbGVhc2UganVzdCBsaXN0ZW4gdG8gaGltLCBoZSBzYXlzIHJhaXNpbnMsIHN1Z2FyIGFuZCBjb2NvbnV0IGdvIGdyZWF0IGluIGJyZWFkISIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjgsCiAgICAgICAgICAgICAgICJlbmQiOjE4LAogICAgICAgICAgICAgICAidGV4dCI6IkhlIGNvbWVzIGhlcmUsIHRlbGxzIG1lIHRoYXQgc2hpdCwgYW5kIGV4cGVjdHMgbWUgdG8gYmVsaWV2ZSBoaW0_ICBJIGdvaW5nIHRvIHRocm93IGhpbSBmcm9tIHRoZSByb29mISIKICAgICAgICAgICAgfQogICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAgImlkIjoiMDciLAogICAgICAgICAiY3VlcyI6WwogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICJzdGFydCI6MC4zLAogICAgICAgICAgICAgICAiZW5kIjo2LAogICAgICAgICAgICAgICAidGV4dCI6IllvdSBrbm93IHRoZXJlIGFyZSBzb21lIHBlb3BsZSBvdXQgdGhlcmUgd2hvIHRoaW5rIHBlc2h3YXJpIG5hYW5zIGFyZSBpbmNyZWRpYmxlPyIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjExLAogICAgICAgICAgICAgICAiZW5kIjoxNS45LAogICAgICAgICAgICAgICAidGV4dCI6IldobyBvbiBFYXJ0aCB0b2xkIHRoZW0gdGhhdCBzaGl0PyIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjE3LAogICAgICAgICAgICAgICAiZW5kIjoyMiwKICAgICAgICAgICAgICAgInRleHQiOiJNZSEhICBCZWNhdXNlIEkgYW0gYSBiYXN0YXJkISIKICAgICAgICAgICAgfQogICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAgImlkIjoiMDgiLAogICAgICAgICAiY3VlcyI6WwogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICJzdGFydCI6MC4xLAogICAgICAgICAgICAgICAiZW5kIjozLjYsCiAgICAgICAgICAgICAgICJ0ZXh0IjoiTXkgc2VjcmV0IHJlY2lwZSBmb3IgcGVzaHdhcmkgbmFhbnMgaXMgbmVhcmx5IGNvbXBsZXRlISIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjMuOSwKICAgICAgICAgICAgICAgImVuZCI6NS41LAogICAgICAgICAgICAgICAidGV4dCI6IllvdSBkbyBrbm93IG5vIG9uZSBnaXZlcyBhIHNoaXQsIHJpZ2h0PyIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjksCiAgICAgICAgICAgICAgICJlbmQiOjkuOCwKICAgICAgICAgICAgICAgInRleHQiOiJJJ20gdGVsbGluZyB5b3UsIG5vIG9uZSEiCiAgICAgICAgICAgIH0sCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgInN0YXJ0IjoxMCwKICAgICAgICAgICAgICAgImVuZCI6MTMsCiAgICAgICAgICAgICAgICJ0ZXh0IjoiSnVzdCB5b3Ugd2FpdCBhbmQgc2VlISAgR29kIGJsZXNzIHlvdSEiCiAgICAgICAgICAgIH0KICAgICAgICAgXQogICAgICB9LAogICAgICB7CiAgICAgICAgICJpZCI6IjA5IiwKICAgICAgICAgImN1ZXMiOlsKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjExLjcsCiAgICAgICAgICAgICAgICJlbmQiOjE1LjgsCiAgICAgICAgICAgICAgICJ0ZXh0IjoiTGV0J3MgZ28gZ2V0IGEgY3VycnksIHNraW5ueSBsZWdzISIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjE2LAogICAgICAgICAgICAgICAiZW5kIjoyMC41LAogICAgICAgICAgICAgICAidGV4dCI6IkJ1dCBjdXJyaWVzIHJvdCBteSBndXRzLCBJJ2xsIHNwZW5kIGFsbCBuaWdodCBvbiB0aGUgdG9pbGV0ISIKICAgICAgICAgICAgfSwKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjIzLAogICAgICAgICAgICAgICAiZW5kIjoyNi41LAogICAgICAgICAgICAgICAidGV4dCI6IkJ1dCBJIGtub3cgd2hhdCB3aWxsIHNldHRsZSBpdCEgIEEgc3dlZXQgcGVzaHdhcmkgbmFhbiEgIEkgcHJvbWlzZSEiCiAgICAgICAgICAgIH0KICAgICAgICAgXQogICAgICB9LAogICAgICB7CiAgICAgICAgICJpZCI6IjEwIiwKICAgICAgICAgImN1ZXMiOlsKICAgICAgICAgICAgewogICAgICAgICAgICAgICAic3RhcnQiOjUsCiAgICAgICAgICAgICAgICJlbmQiOjguOCwKICAgICAgICAgICAgICAgInRleHQiOiJIYWhhLCBhcmUgeW91IHRyeWluZyB0byBidXJuIG9mZiB0aGF0IGZhdC1ib3kgY3Vycnk_IgogICAgICAgICAgICB9LAogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICJzdGFydCI6MTEuMywKICAgICAgICAgICAgICAgImVuZCI6MTMuMywKICAgICAgICAgICAgICAgInRleHQiOiJTbyB3aGF0IGlmIEkgYW0_IgogICAgICAgICAgICB9LAogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICJzdGFydCI6MTQuOCwKICAgICAgICAgICAgICAgImVuZCI6MTgsCiAgICAgICAgICAgICAgICJ0ZXh0IjoiSXQncyBwb2ludGxlc3MuICBPbmNlIGdoZWUgc3RpY2tzIHRvIHlvdXIgYm9uZXMgeW91IGFpbid0IG5ldmVyIGdldHRpbmcgcmlkISIKICAgICAgICAgICAgfQogICAgICAgICBdCiAgICAgIH0KICAgXQp9';
+
+const _max_length_of_caption = 200;
+
+/*
+  Returns a value from the querystring
+  Null in the case of exception or missing
+*/
+function getQueryStringParam(paramName)
+{
+  returnVal = null;
+
+  try
+  {
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramValue = urlParams.get(paramName);
+    returnVal = paramValue;
+  }
+  catch (e)
+  {
+    returnVal = null;
+  }
+  return returnVal;
+}
+
+/*
+  Runs when the page is first started and is used to generate the page content based on requested context
+*/
+function startUp()
+{
+  try
+  {
+    const pageParam = getQueryStringParam('p');
+
+    if (pageParam == 'Create')
+    {
+      generateCreate();
+    }
+    else if (pageParam == 'Play')
+    {
+      generatePlayer();
+    }
+    else
+    {
+      generateFrontPage();
+    }
+  }
+  catch (e)
+  {
+    dumpError(e);
+  }
+}
+
+/*
+  Displays front page content, used when the context is not one of Play or Create
+*/
+function generateFrontPage()
+{
+  try
+  {
+    document.getElementById('BodyContents').innerHTML = '<div class="body-text">In 2002, fanta.dk ran a promo website for Fanta Shokata which allowed visitors to create their own funny movies based on scenes from Indian movies.  Sadly, the site ceased to be in early 2003 and took all the videos people made with it.<br /><br />This page was created in respect of that work, leveraging some content from archive.org, some reverse-engineering of the original Shockwave Flash content, some videos found on YouTube (thanks <a href="https://www.youtube.com/@ShadowEffex" target="_new">ShadowFX</a>) and some of my own scrappy HTML (I\'m talking tables for positioning AND css AND divs AND spans), JavaScript and image editing to fill the gaps.<br /><br />It is meant to be a little fun.  Please treat it as such, and if you find any bugs with the site, please contact me below.<br /><br /><br /><br /><b>This site has no affiliation with Fanta.</b><br />\'Fanta\' and Fanta Shokata are trademarks of The Coca-Cola Company. (c) 2002 The Coca-Cola Company.<br /><br /><br />With all that said, go create your own movies by clicking MAKE MOVIES at the top right!</div>';
+  }
+  catch (e)
+  {
+    dumpError(e);
+  }
+}
+
+
+/*
+  Briefs out any error to the user, hopefully useful in debugging
+*/
+function dumpError(e)
+{
+  try
+  {
+    document.getElementById('BodyContents').innerHTML = '<span class="body-text">There was an error processing the request.<br /><br />The error was:<br />' + e.message + '</span>';
+  }
+  catch(x)
+  {
+    // Jeez just messagbox it
+    window.alert(x.message);
+  }
+}
+
+
+
+/*
+  Returns the JSON structure relating to the videoId passed in
+  or NULL in the event of error
+*/
+function getCaptionContent(videoId)
+{
+  returnVal = null;
+
+  try
+  {
+    // Decode the default captions
+    rawCaptions = base64URLdecode(_captions);
+    // Parse the baseline JSON and then the content
+    jsonCaptions = JSON.parse(rawCaptions);
+
+    // Set the captions
+    for (let videoIndex = 0; videoIndex < jsonCaptions['videos'].length; videoIndex++)
+    {
+      let currentVideo = jsonCaptions['videos'][videoIndex];
+      if (currentVideo['id'] == videoId)
+      {
+        returnVal = currentVideo;
+        break;
+      }
+    }
+  }
+  catch(e)
+  {
+    dumpError(e);
+    returnVal = null;
+  }
+
+  return returnVal;
+}
+
+/*
+  Generates the player page
+  by...
+  Pulling out the 'c' querystring parameter and getting the supplied JSON
+  Renders a video player on the screen
+  Sets the player to the video within the supplied JSON
+  Adds the captions to the video with the known timestamps, but with cues in the supplied JSON
+*/
+function generatePlayer()
+{
+  try
+  {
+    // Get the content from the query string
+    contentParam = getQueryStringParam('c');
+    contentParam = contentParam || ''
+
+    // Test data, uncomment if needed
+    // contentParam = 'ewogICAiaWQiOiIwMSIsCiAgICJjdWVzIjpbCiAgICAgICJsaW5lIDEiLAogICAgICAibGluZSAyIiwKICAgICAgImxpbmUgMyIKICAgXQp9';
+
+    
+    // Decode the Base64URL encoded querystring
+    rawContent = base64URLdecode(contentParam);
+
+    // Parse it into a JSON object
+    jsonContent = JSON.parse(rawContent);
+    // And pull out the requsted video ID
+    videoId = jsonContent['id'];
+
+
+    // Now go off and find the baseline data for this video id
+    captionContent = getCaptionContent(videoId);
+    if (captionContent == null)
+    {
+      throw new Error('The requested Video ID was not found in the baseline list!');
+    }
+
+
+    // Create the movie player
+    document.getElementById('BodyContents').innerHTML = '<div class="movie-span"><video width="480" height="440" controls id="VideoPlayer" style="background-color: black" preload="metadata"><source id="VideoSource" src="" type="video/mp4"></video></div>';
+
+    // Set the source and load it
+    document.getElementById('VideoSource').src = 'v/Fanta Shokata - Clip ' + videoId + '.mp4#t=0.2';
+    document.getElementById('VideoPlayer').load();
+
+    // Set the captions
+    let video = document.getElementById("VideoPlayer");
+
+    // Create a track
+    let track = video.addTextTrack("captions", "Captions", "en");
+    track.mode = "showing";
+
+    // Now iterate the cues within the definition
+    for (let cueIndex = 0; cueIndex < captionContent['cues'].length; cueIndex++)
+    {
+      let currentCue = captionContent['cues'][cueIndex];
+
+      // Using the cuetext from within the querystring, trim if necessary
+      cueText = jsonContent['cues'][cueIndex] || '';
+      cueText = cueText.substring(0, _max_length_of_caption);
+
+      // Create a cue, with known values which work for the video size and position
+      let cue = new VTTCue(currentCue['start'], currentCue['end'], cueText);
+      cue.position = 50;
+      cue.align = "center";
+      cue.size = 80;
+      cue.snapToLines = true; // line works in % downwards
+      cue.line = 12;
+
+      // Add the cue to the track
+      track.addCue(cue);
+    }
+
+    // And start it playing, not supported by browsers
+    //document.getElementById('VideoPlayer').play();
+  }
+  catch (e)
+  {
+    dumpError(e);
+  }
+}
+
+
+
+/*
+  Creates the Make Movies page
+
+*/
+function generateCreate()
+{
+  try
+  {
+    // Render a drop down
+    dropDown = '<select id="VideoSelect" onchange="UpdateForVideo(this)" class="body-text">'
+
+    // Decode the default captions
+    rawCaptions = base64URLdecode(_captions);
+
+    // Parse the baseline JSON and then the content
+    jsonCaptions = JSON.parse(rawCaptions);
+
+    dropDown = dropDown + '<option class="body-text" value="">Select Clip</option>';
+    // Add all the known videos to the drop down
+    for (let videoIndex = 0; videoIndex < jsonCaptions['videos'].length; videoIndex++)
+    {
+      let currentVideo = jsonCaptions['videos'][videoIndex];
+      dropDown = dropDown + '<option class="body-text" value="' + currentVideo['id'] + '">Clip ' + currentVideo['id'] + '</option>';
+    }
+    dropDown = dropDown + '</select>';
+
+    // Materialise it, and set the selected index to the blank one at the top
+    document.getElementById('BodyContents').innerHTML = dropDown + '<br /><br /><div id="CreateContents" class="createvideo-div"></div>';
+    document.getElementById('VideoSelect').selectedIndex = 0;
+  }
+  catch (e)
+  {
+    dumpError(e);
+  }
+}
+
+
+
+
+/*
+  Updates the Make Movies page with details relevant for the video
+*/
+function UpdateForVideo(selectedItem)
+{
+
+  // At this point we have an identifier, i.e. 01, 02, 10 in selectedItem.value
+  // Build form which includes a video player, as many text boxes as needed for the video in question
+  // Pre-populate everything and include a button for test.  Also include a button for generate a link
+
+  try
+  {
+    if (selectedItem.value == '')
+    {
+      // Cope with the user going back to 'Select Clip'
+      document.getElementById('CreateContents').innerHTML = '';
+    }
+    else
+    {
+      createContent = '<div class="movie-span"><video width="480" height="440" controls id="VideoPreview" style="background-color: black" preload="metadata"><source id="VideoPreviewSource" src="" type="video/mp4"></video></div>';
+
+
+      // Now go off and find the baseline data for this video id
+      captionContent = getCaptionContent(selectedItem.value);
+      if (captionContent == null)
+      {
+        throw new Error('The requested Video ID was not found in the baseline list!');
+      }
+
+
+      // Found the video, build a rudimentary form
+      for (let cueIndex = 0; cueIndex < captionContent['cues'].length; cueIndex++)
+      {
+        let currentCue = captionContent['cues'][cueIndex];
+
+        createContent = createContent + '<br /><div class="movie-span">Caption ' + (cueIndex + 1).toString() + ': <input class="body-text" maxlength="200" size="50" type="text" id="cue' + cueIndex.toString() + '" value="' + currentCue['text'] + '"></input></div>';
+      }
+
+      createContent = createContent + '<br /><div class="movie-span"><input type="button" class="body-text" value="Preview" onclick="PreviewVideo(\'' + selectedItem.value + '\')" /> <input type="button" class="body-text" value="Share" onclick="ShareVideo(\'' + selectedItem.value + '\')" /></div><br /><br /><div class="movie-span" id="ShareDiv"></div>';
+      document.getElementById('CreateContents').innerHTML = createContent;
+
+      // Set the source and load it
+      document.getElementById('VideoPreviewSource').src = 'v/Fanta Shokata - Clip ' + selectedItem.value + '.mp4#t=0.2';
+      document.getElementById('VideoPreview').load();
+
+      // Add a track, cues will be generated when the preview button is pressed.
+      let track = document.getElementById('VideoPreview').addTextTrack("captions", "Captions", "en");
+      track.mode = "showing";
+    }
+  }
+
+  catch (e)
+  {
+    dumpError(e);
+  }
+}
+
+
+
+function PreviewVideo(selectedVideo)
+{
+  try
+  {
+    // Get rid of existing cues for the baseline track
+    track = document.getElementById("VideoPreview").textTracks[0];
+    while (track.cues.length)
+    {
+      track.removeCue(track.cues[0]);
+    }
+
+    // Now add the new cues based on what is in the text boxes
+
+    // Now go off and find the baseline data for this video id
+    captionContent = getCaptionContent(selectedVideo);
+    if (captionContent == null)
+    {
+      throw new Error('The requested Video ID was not found in the baseline list!');
+    }
+
+    let video = document.getElementById("VideoPreview");
+
+    // Now iterate the cues within the definition
+    for (let cueIndex = 0; cueIndex < captionContent['cues'].length; cueIndex++)
+    {
+      let currentCue = captionContent['cues'][cueIndex];
+
+      // Swap out the definition's text for the value in the content, trim if necessary
+      cueText = document.getElementById('cue' + cueIndex.toString()).value || '';
+      cueText = cueText.substring(0, _max_length_of_caption);
+
+      // Create a cue, with known values which work for the video size and position
+      let cue = new VTTCue(currentCue['start'], currentCue['end'], cueText);
+      cue.position = 50;
+      cue.align = "center";
+      cue.size = 80;
+      cue.snapToLines = true; // line works in % downwards
+      cue.line = 12;
+
+      // Add the cue to the track
+      track.addCue(cue);
+    }
+
+    // And start it playing
+    document.getElementById('VideoPreview').currentTime = 0;
+    document.getElementById('VideoPreview').play();
+  }
+  catch (e)
+  {
+    dumpError(e)
+  }
+}
+
+
+
+/*
+  Generates a share link and gives it to the user
+*/
+function ShareVideo(selectedVideo)
+{
+  try
+  {
+    // Quickly build some JSON
+    outputJson = '{"id":"' + selectedVideo + '","cues":[';
+
+    // Iterate every cue textbox within the DOM
+    cueCounter = 0;
+    while (document.getElementById('cue' + cueCounter.toString()) != null)
+    {
+      if (cueCounter > 0)
+      {
+        outputJson = outputJson + ',';
+      }
+
+      // Get the value of the textbox, trim if necessary - safeguard double quotes for JSON
+      cueText = document.getElementById('cue' + cueCounter.toString()).value || '';
+      cueText = cueText.substring(0, _max_length_of_caption).replaceAll('"', '\\"');
+
+      outputJson = outputJson + '"' + cueText + '"';
+
+      cueCounter++;
+    }
+
+    // Finish the JSON off
+    outputJson = outputJson + ']}';
+
+    console.log(outputJson);
+    // Encode it
+    outputJsonEncoded = base64URLencode(outputJson);
+
+    console.log(outputJsonEncoded);
+
+    // Generate a URL for everyone
+    url = window.location.href.split('?')[0] + "?p=Play&c=" + outputJsonEncoded;
+
+    // Output it
+    document.getElementById('ShareDiv').innerHTML = '<b>Your unique <a href="' + url + '" target="_new">Share URL</a> is:<br /><textarea id="shareURL" rows="10" cols="70">' + url + '</textarea><br /><button class="body-text" onclick="copyShareURL()">Copy Share URL</button>';
+  }
+  catch (e)
+  {
+    dumpError(e)
+  }
+
+}
+
+
+/*
+  Copies the URL to the clipboard
+*/
+function copyShareURL()
+{
+  try
+  {
+    // Get the text field
+    var copyText = document.getElementById("shareURL");
+
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value);
+
+  }
+  catch (e)
+  {
+    // Just sack it off...
+  }
+}
+
+
+
+/*
+  Helper function to encode JSON into a base64 string suitable for the querystring
+*/
+function base64URLencode(str)
+{
+  //const utf8Arr = new TextEncoder().encode(str);
+  //const base64Encoded = btoa(utf8Arr);
+  const base64Encoded = btoa(str);
+  return base64Encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+
+/*
+  Helper function to decode base64url data into its underlying content
+*/
+function base64URLdecode(str)
+{
+  const base64Encoded = str.replace(/-/g, '+').replace(/_/g, '/');
+  const padding = str.length % 4 === 0 ? '' : '='.repeat(4 - (str.length % 4));
+  const base64WithPadding = base64Encoded + padding;
+  return atob(base64WithPadding)
+    .split('')
+    .map(char => String.fromCharCode(char.charCodeAt(0)))
+    .join('');
+
+}
+
+</script>
+
+</body>
+</html>
