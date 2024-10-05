@@ -1,1 +1,1 @@
-README coming soon.
+README coming soon.  In the meantime, check it out [here](https://dxoverdy.github.io/fanta-shokata/?p=Home).
