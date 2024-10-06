@@ -336,7 +336,6 @@ function generatePlayer()
 
     // Create a track
     let track = video.addTextTrack("captions", "Captions", "en");
-    track.mode = "showing";
 
     // Now iterate the cues within the definition
     for (let cueIndex = 0; cueIndex < captionContent['cues'].length; cueIndex++)
@@ -358,6 +357,8 @@ function generatePlayer()
       // Add the cue to the track
       track.addCue(cue);
     }
+
+    track.mode = "showing";
 
     // And start it playing, not supported by browsers
     //document.getElementById('VideoPlayer').play();
@@ -444,7 +445,7 @@ function UpdateForVideo(selectedItem)
       {
         let currentCue = captionContent['cues'][cueIndex];
 
-        createContent = createContent + '<br /><div class="movie-span">Caption ' + (cueIndex + 1).toString() + ': <input class="body-text" maxlength="200" size="50" type="text" id="cue' + cueIndex.toString() + '" value="' + currentCue['text'] + '"></input></div>';
+        createContent = createContent + '<br /><div class="movie-span">Caption ' + (cueIndex + 1).toString() + ': <input class="body-text" maxlength="' + _max_length_of_caption.toString() + '" size="60" type="text" id="cue' + cueIndex.toString() + '" value="' + currentCue['text'] + '"></input></div>';
       }
 
       createContent = createContent + '<br /><div class="movie-span"><input type="button" class="body-text" value="Preview" onclick="PreviewVideo(\'' + selectedItem.value + '\')" /> <input type="button" class="body-text" value="Share" onclick="ShareVideo(\'' + selectedItem.value + '\')" /></div><br /><br /><div class="movie-span" id="ShareDiv"></div>';
@@ -472,8 +473,10 @@ function PreviewVideo(selectedVideo)
 {
   try
   {
+    
     // Get rid of existing cues for the baseline track
     track = document.getElementById("VideoPreview").textTracks[0];
+    track.mode = "hidden";
     while (track.cues.length)
     {
       track.removeCue(track.cues[0]);
@@ -510,7 +513,7 @@ function PreviewVideo(selectedVideo)
       // Add the cue to the track
       track.addCue(cue);
     }
-
+    track.mode = "showing";
     // And start it playing
     document.getElementById('VideoPreview').currentTime = 0;
     document.getElementById('VideoPreview').play();
